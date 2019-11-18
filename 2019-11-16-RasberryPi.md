@@ -140,3 +140,5 @@ spec:
   externalIPs:
   - {외부접속IP}
 ```
+
+yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성하는 방법도 있음.
