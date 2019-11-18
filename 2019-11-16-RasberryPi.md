@@ -31,6 +31,8 @@ $ docker info
 
     - k3s는 Rancher Lab에서 최소 자원을 사용하는 k8s 클러스터 구성을 위한 솔루션으로 시작되었고, 바이너리 전체가 약 40mb로 가볍다는 특징이 있다.
 
+    - 현재 최신버전은 2019-11-18을 기준으로 v0.10.2이다.
+
     - 주로 Edge, IoT 등 저전력, 저사양 기반 ARM계열 컴퓨팅에 최적화 되어 있다.
 
     - k8s에서 Cloud Provider, Storage Plugin을 제거하였고, default 저장소가 etcd가 아닌 sqlite3로 되어 있다.
@@ -45,6 +47,7 @@ $ curl -sfL https://get.k3s.io | sh -
 
 ### 3) k3s 설치확인
 
+k3s가 정상적으로 설치되었는지는 다음의 명령어를 통해 확인하면 된다.
 ```
 $ kubectl get nodes
 
@@ -53,4 +56,87 @@ $ kubectl get deployments --all-namespaces
 $ kubectl get pods --all-namespaces
 
 $ kubectl get service --all-namespaces
+```
+
+아래의 명령어는 node를 추가할 때 사용하는 조인키이다.
+```
+$ sudo cat /var/lib/rancher/k3s/server/node-token
+```
+
+### 4) k3s에 어플리케이션 배포 실습
+
+hello.js
+
+```
+var http = require('http');
+var content = function(req, resp) {
+ resp.end("Hello world!" + "\n");
+ resp.writeHead(200);
+}
+var w = http.createServer(content);
+w.listen(8000);
+```
+
+Dockerfile
+```
+FROM node:slim
+EXPOSE 8000
+COPY hello.js .
+CMD node hello.js
+```
+
+Docker Hub Site
+- [Docker Hub] https://hub.docker.com/
+
+Docker Container Run
+```
+docker build -t khyw407/hello .
+-t : 레파지토리/이미지명:버전
+
+docker images
+docker run -d -p 8100:8000 khyw407/hello
+-d : 백그라운드 모드
+-p : 포트변경
+
+docker ps
+docker exec -it {컨테이너id} /bin/bash
+```
+
+Docker Image Push
+```
+docker login
+docker push khyw407/hello
+```
+
+Kubernetes
+- Pod
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels:
+    app: hello
+spec:
+  containers:
+  - name: hello-container
+    image: khyw407/hello
+    ports:
+    - containerPort: 8000
+```
+
+- Service
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-svc
+spec:
+  selector:
+    app: hello
+  ports:
+    - port: 8200
+      targetPort: 8000
+  externalIPs:
+  - {외부접속IP}
 ```
