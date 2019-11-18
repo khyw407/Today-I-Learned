@@ -90,7 +90,7 @@ Docker Hub Site
 
 Docker Container Run
 ```
-docker build -t khyw407/hello .
+docker build -t khyw407/hello .{Dockerfile경로}
 -t : 레파지토리/이미지명:버전
 
 docker images
