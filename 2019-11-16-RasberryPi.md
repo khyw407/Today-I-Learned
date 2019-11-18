@@ -125,7 +125,7 @@ spec:
     - containerPort: 8000
 ```
 
-- Service
+- Service(디폴트로 ClusterIP를 사용)
 ```
 apiVersion: v1
 kind: Service
@@ -138,7 +138,7 @@ spec:
     - port: 8200
       targetPort: 8000
   externalIPs:
-  - {외부접속IP}
+  - {외부접속에서 접속하는IP}
 ```
 
 yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성하는 방법도 있음.
