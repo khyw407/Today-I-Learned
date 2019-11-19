@@ -142,3 +142,15 @@ spec:
 ```
 
 yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성하는 방법도 있음.
+
+### 5) Kubernetes Dashboard 설치
+
+```
+$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+#### 5-1) Proxy를 사용하는 방법
+
+#### 5-2) NodePort를 사용하는 방법
+
+#### 5-3) api-server를 사용하는 방법
