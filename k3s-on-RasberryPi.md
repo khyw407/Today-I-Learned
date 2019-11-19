@@ -146,7 +146,7 @@ yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성�
 ### 5) Kubernetes Dashboard 설치
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 ```
 
 #### 5-1) Proxy를 사용하는 방법
