@@ -149,7 +149,53 @@ yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성�
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 ```
 
-#### 5-1) Proxy를 사용하는 방법
+#### 5-1) Kubernetes Login 인증키 생성
+
+serviceaccount 생성
+```
+$ cat << EOF | kubectl create -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kube-system
+EOF
+```
+
+ClusterRoleBinding 생성
+```
+$ cat << EOF | kubectl create -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kube-system
+EOF
+```
+
+토큰 확인
+```
+$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}') 
+```
+
+```
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login 접속 후 토큰 인증
+```
+
+#### 5-2) Proxy를 사용하는 방법
+
+```
+$ kubectl proxy 명령어로 실행
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/ 접속하여 확인
+```
 
 #### 5-2) NodePort를 사용하는 방법
 
