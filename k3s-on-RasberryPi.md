@@ -197,6 +197,59 @@ $ kubectl proxy 명령어로 실행
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/ 접속하여 확인
 ```
 
+```
+롤백시 아래의 명령어를 사용
+
+$ kubectl delete -f dashboard-admin.yaml
+```
+
 #### 5-2) NodePort를 사용하는 방법
 
-#### 5-3) api-server를 사용하는 방법
+Kubernetes Service edit
+```
+$ kubectl edit service kubernetes-dashboard -n kubernetes-dashboard
+```
+
+yaml 파일 수정
+```
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"k8s-app":"kubernetes-dashboard"}
+  creationTimestamp: "2019-11-19T08:59:26Z"
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+  resourceVersion: "26067"
+  selfLink: /api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard
+  uid: 9d8c9397-0a70-4539-9878-dc61f0dbafff
+spec:
+  clusterIP: 10.43.136.241
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31377
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    k8s-app: kubernetes-dashboard
+  sessionAffinity: None
+  type: ClusterIP   # 이 부분을 ClusterIP -> NodePort로 수정
+status:
+  loadBalancer: {}
+```
+
+바인딩 포트 확인
+```
+$ kubectl get service kubernetes-dashboard -n kubernetes-dashboard
+```
+
+https://<master-ip>:바인딩포트로 접속
+```
+토큰 확인은 아래의 명령어 사용
+
+$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}') 
+```
