@@ -90,11 +90,11 @@ Docker Hub Site
 
 Docker Container Run
 ```
-docker build -t khyw407/hello .{Dockerfile경로}
--t : 레파지토리/이미지명:버전
+docker build -t {레파지토리/이미지명} .{Dockerfile경로}
+-t : 레파지토리/이미지명:버전(태그옵션)
 
 docker images
-docker run -d -p 8100:8000 khyw407/hello
+docker run -d -p 8100:8000 {docker 이미지명}
 -d : 백그라운드 모드
 -p : 포트변경
 
@@ -105,7 +105,7 @@ docker exec -it {컨테이너id} /bin/bash
 Docker Image Push
 ```
 docker login
-docker push khyw407/hello
+docker push {docker 이미지명}
 ```
 
 Kubernetes
@@ -120,7 +120,7 @@ metadata:
 spec:
   containers:
   - name: hello-container
-    image: khyw407/hello
+    image: {레파지토리/이미지명}
     ports:
     - containerPort: 8000
 ```
