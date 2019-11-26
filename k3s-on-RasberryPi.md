@@ -45,6 +45,12 @@ $ sudo su
 $ curl -sfL https://get.k3s.io | sh -
 ```
 
+k3s 삭제시
+
+```
+$ sh /usr/local/bin/k3s-agent-uninstall.sh
+```
+
 ### 3) k3s 설치확인
 
 k3s가 정상적으로 설치되었는지는 다음의 명령어를 통해 확인하면 된다.
