@@ -253,3 +253,13 @@ https://<master-ip>:바인딩포트로 접속
 
 $ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}') 
 ```
+
+### 6. 출처
+
+```
+https://k3s.io/
+
+https://kubernetes.io/ko/
+
+https://docs.docker.com/get-started/
+```
