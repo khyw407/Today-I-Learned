@@ -63,6 +63,20 @@ $ kubectl get service --all-namespaces
 $ sudo cat /var/lib/rancher/k3s/server/node-token
 ```
 
+### 3-1) node 추가(worker)
+
+worker 노드에 docker가 설치되어 있다고 가정.
+
+```
+$ curl -sfL https://get.k3s.io | sh -
+
+$ export NODE_TOKEN="Master 노드의 토큰정보를 입력"
+
+$ export MASTER_IP="Master 노드의 IP정보 입력"
+
+$ k3s agent --server https://${MASTER_IP}:6443 --token ${NODE_TOKEN}
+```
+
 ### 4) k3s에 어플리케이션 배포 실습
 
 hello.js
