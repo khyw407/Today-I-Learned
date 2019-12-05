@@ -45,6 +45,12 @@ $ sudo su
 $ curl -sfL https://get.k3s.io | sh -
 ```
 
+k3s 삭제시
+
+```
+$ sh /usr/local/bin/k3s-agent-uninstall.sh
+```
+
 ### 3) k3s 설치확인
 
 k3s가 정상적으로 설치되었는지는 다음의 명령어를 통해 확인하면 된다.
@@ -61,6 +67,20 @@ $ kubectl get service --all-namespaces
 아래의 명령어는 node를 추가할 때 사용하는 조인키이다.
 ```
 $ sudo cat /var/lib/rancher/k3s/server/node-token
+```
+
+### 3-1) node 추가(worker)
+
+worker 노드에 docker가 설치되어 있다고 가정.
+
+```
+$ curl -sfL https://get.k3s.io | sh -
+
+$ export NODE_TOKEN="Master 노드의 토큰정보를 입력"
+
+$ export MASTER_IP="Master 노드의 IP정보 입력"
+
+$ k3s agent --server https://${MASTER_IP}:6443 --token ${NODE_TOKEN}
 ```
 
 ### 4) k3s에 어플리케이션 배포 실습
@@ -90,11 +110,11 @@ Docker Hub Site
 
 Docker Container Run
 ```
-docker build -t khyw407/hello .{Dockerfile경로}
--t : 레파지토리/이미지명:버전
+docker build -t {레파지토리/이미지명} .{Dockerfile경로}
+-t : 레파지토리/이미지명:버전(태그옵션)
 
 docker images
-docker run -d -p 8100:8000 khyw407/hello
+docker run -d -p 8100:8000 {docker 이미지명}
 -d : 백그라운드 모드
 -p : 포트변경
 
@@ -105,7 +125,7 @@ docker exec -it {컨테이너id} /bin/bash
 Docker Image Push
 ```
 docker login
-docker push khyw407/hello
+docker push {docker 이미지명}
 ```
 
 Kubernetes
@@ -120,7 +140,7 @@ metadata:
 spec:
   containers:
   - name: hello-container
-    image: khyw407/hello
+    image: {레파지토리/이미지명}
     ports:
     - containerPort: 8000
 ```
@@ -252,4 +272,14 @@ https://<master-ip>:바인딩포트로 접속
 토큰 확인은 아래의 명령어 사용
 
 $ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}') 
+```
+
+### 6. 출처
+
+```
+https://k3s.io/
+
+https://kubernetes.io/ko/
+
+https://docs.docker.com/get-started/
 ```
