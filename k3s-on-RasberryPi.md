@@ -83,6 +83,46 @@ $ export MASTER_IP="Master 노드의 IP정보 입력"
 $ k3s agent --server https://${MASTER_IP}:6443 --token ${NODE_TOKEN}
 ```
 
+### 3-2) Kubernetes 기본 오브젝트
+
+Pod
+
+![pod h:200](https://user-images.githubusercontent.com/37721713/70207652-c8bea480-176e-11ea-8843-fa0c7b4ec59e.PNG)
+
+```
+Pod는 쿠버네티스에서 가장 기본적인 배포단위로 컨테이너를 포함하는 단위
+
+하나 이상의 컨테이너를 포함
+
+Pod 내의 컨테이너는 IP와 포트를 공유(컨테이너간 localhost 통신 가능)
+
+같은 Pod 내에 배포된 컨테이너 간 볼륨 공유 가능
+```
+
+Service
+
+![service h:250 w:500](https://user-images.githubusercontent.com/37721713/70207653-c8bea480-176e-11ea-9cdd-c937f8001200.PNG)
+
+```
+Pod는 언제나 죽을 수 있고, 재생성시 IP를 새로 할당받음
+
+Service를 Pod에 연결시켜 놓으면 Service의 IP를 통해 Pod에 접근 가능
+
+type은 3가지(ClusterIP, NodePort, Load Balancer)
+```
+
+Volume
+
+```
+emptyDir : 컨테이너들끼리 데이터를 공유하기 위해 volume을 사용하는 것
+
+hostPath : pod들이 올라가 있는 Node의 path를 volume으로 사용
+
+PVC(Persistent Volume Claim) / PV(Persistent Volume) : pod의 영속성있는 볼륨을 제공하기 위한 기능.
+```
+
+- 이외에도 Controller와 같은 추상화된 오브젝트가 존재
+
 ### 4) k3s에 어플리케이션 배포 실습
 
 hello.js
