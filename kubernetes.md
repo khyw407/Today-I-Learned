@@ -187,3 +187,20 @@ Pod는 PV에 바로 연결하는 것이 아닌 PVC를 거쳐야 한다.
 PVC를 거치는 이유는 Volume 사용에 있어 user 영역(pod, PVC)과 admin 영역(PV, Volume)을 나누었기 때문이다.
 admin은 쿠버네티스를 담당하는 운영자, user는 pod에 서비스를 만들고 배포를 관리하는 서비스 담당자.
 
+## 9. ConfigMap, Secret
+
+Dev환경과 Production 환경이 있을 때, 특정 서비스가 인증을 필요로 한다. 이때 개발환경에서는 인증을 꺼놓고 개발 및 테스트를 진행할 수 있지만, 실제 프로덕션 환경에서는 인증 모듈이 실행되어야 한다. 즉 특정 옵션과 유저의 키값 등이 바뀌어야 한다. 특정 이미지에서 제공되는 값을 바꾸는 것이기 때문에 개발환경과 프로덕션 환경에서 사용되는 이미지가 다르게 되고, 별도로 관리하는 등의 리소스가 낭비가 된다. 
+환경에 따라 변하는 값들은 외부에서 결정할 수 있게 하는데, 그것을 도와주는 것이 ConfigMap과 Secret이다.
+일반적인 상수들을 모아서 ConfigMap을 만들고 키처럼 보안이 필요한 것들은 Secret으로 관리를 한다. Pod를 생성하는 시점에 이 두 값을 연결을 하게 되면, 컨테이너의 환경변수에 해당 데이터들이 들어가게 된다. 따라서 서비스는 환경변수의 값을 읽어서 개발/상용 환경에 따른 옵션을 설정할 수 있다. 
+
+ConfigMap과 Secret을 사용할 때에는 Literal(상수)과 File 형태로 사용할 수 있다. File은 Volume Mount 형태로 사용을 해야 한다. 
+Secret은 value를 만들때 Base64를 기반으로 만드는데 실제 Pod에서 사용될 때에는 decoding되어 사용된다. Secret의 보안적인 부분은 일반적으로 쿠버네티스에서 사용되는 값은 데이터베이스에 저장이 되나 Secret은 메모리에 저장이 되고 1Mbyte 이하의 크기여야 한다. ConfigMap은 key:value 형태로 무제한 만들 수 있다. 
+
+
+File을 환경변수에 넣는방법은 파일 자체가 ConfigMap, Secret의 Key가 될 수 있다. 파일명은 Key가 되고 그 안의 내용이 value가 됨.
+이것을 Pod의 환경변수에 넣을 때 파일의 내용만 따로 넣어줘야 한다.
+kubectl create configmap cm-file --from-file=./file.txt
+kubectl create secret generic sec-file --from-file=./file.txt
+위의 형태를 사용해서 파일에서 내용만 가져와 ConfigMap, Secret을 만들 수 있다.
+Secret을 만드는 경우 file의 내용이 Base64로 바뀌므로 주의해야 한다.
+
