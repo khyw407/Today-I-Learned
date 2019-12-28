@@ -18,9 +18,9 @@ Rasberry Pi는 항시 pi 계정으로 로그인되고 Docker는 docker라는 그
 ```
 $ sudo usermod -aG docker pi
 
-$ docker info
+재부팅 꼭 진행해주세요!!
 
-이후 재부팅 필수입니다!!
+$ docker info
 ```
 
 ## 3. Rasberry Pi에 k3s 설치
