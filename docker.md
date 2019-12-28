@@ -88,7 +88,7 @@ quit
 
 ```
 docker run -d -p 8000:80 \
-  -e WORDPRESS_DB_HOST=172.17.0.1 \
+  -e WORDPRESS_DB_HOST={IP주소} \
   -e WORDPRESS_DB_NAME=wp \
   -e WORDPRESS_DB_USER=wp \
   -e WORDPRESS_DB_PASSWORD=wp \
