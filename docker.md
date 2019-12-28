@@ -26,9 +26,17 @@
 
 ### 레이어 저장방식
 
+![캡처](https://user-images.githubusercontent.com/37721713/71538700-adf8dd80-2972-11ea-9bb5-e5ee1d419f8d.PNG)
 
+도커 이미지는 컨테이너를 실행하기 위한 모든 정보를 가지고 있기 때문에 보통 용량이 매우 큰 편입니다. 처음 이미지를 다운받을 땐 괜찮지만 기존 이미지에 파일 하나 추가했다고 수백 mb를 다시 받는 것은 매우 비효율적입니다.
 
-### 기본 명령어
+도커는 레이어를 사용하고, 유니온 파일 시스템을 이용해 여러개의 레이어를 하나의 파일 시스템으로 사용할 수 있게 해줍니다. 이미지는 여러개의 읽기 전용(read only) 레이어로 구성되고 파일이 추가되거나 수정되면 새로운 레이어가 생성됩니다.
+
+ubuntu 이미지가 A+B+C의 집합이라면, ubuntu 이미지를 베이스로 만든 nginx 이미지는 A+B+C+nginx가 됩니다. 
+
+컨테이너를 생성할 때도 레이러 방식을 사용하는데 기존의 이미지 레이어 위에 읽기/쓰기(read-write) 레이어를 추가합니다. 이미지 레이어를 그대로 사용하면서 컨테이너가 실행 중에 생성하는 파일이나 변경된 내용은 읽기/쓰기 레이어에 저장되므로 여러개의 컨테이너를 생성해도 최소한의 용량만 사용합니다.
+
+### 자주 사용되는 기본 명령어
 
 | 명령어  |  설명  |
 |---|---|
@@ -41,7 +49,7 @@
 | pull | 이미지 다운로드하기 |
 | rmi | 이미지 삭제하기 |
 
-### 컨테이너 생성 실습
+### 컨테이너 생성 예시
 
 **ubuntu 컨테이너 생성**
 
@@ -52,10 +60,10 @@ docker run --rm -it ubuntu:18.04 /bin/sh
 **간단한 웹 애플리케이션 생성**
 
 ```
-docker run -d -p 4567:4567 subicura/docker-workshop-app:1
+docker run -d -p 8080:8080 {도커 이미지}
 ```
 
-http://xxxx:4567 접속
+http://{ip주소}:8080 접속
 
 **MySQL 생성**
 
@@ -87,7 +95,7 @@ docker run -d -p 8000:80 \
   wordpress
 ```
 
-http://xxxx:8000 접속
+http://{ip주소}:8000 접속
 
 **컨테이너 목록 확인**
 
@@ -98,19 +106,19 @@ docker ps -a
 **컨테이너 로그**
 
 ```
-docker logs xxx
+docker logs {컨테이너ID}
 ```
 
 **컨테이너 종료**
 
 ```
-docker stop xxx
+docker stop {컨테이너ID}
 ```
 
 **컨테이너 삭제**
 
 ```
-docker rm xxx
+docker rm {컨테이너ID}
 ```
 
 **이미지 목록 확인**
@@ -152,40 +160,3 @@ docker run -d -p 8000:80 \
   -e WORDPRESS_DB_PASSWORD=wp \
   wordpress
 ```
-
-## Exam 1. 방명록 만들기
-
-**frontend**
-
-이미지
-- subicura/guestbook-frontend:latest
-
-환경변수
-- PORT # ex) 8000
-- GUESTBOOK_API_ADDR # ex) backend:8000
-
-**backend**
-
-이미지
-- subicura/guestbook-backend:latest
-
-환경변수
-- PORT # ex) 8000
-- GUESTBOOK_DB_ADDR # ex) mongodb:27017
-
-**mongodb**
-
-이미지
-- mongo:4
-
-기본포트
-- 27017
-
-## 정리
-
-```
-docker stop xxx
-docker rm xxx
-docker system prune -a
-```
-
