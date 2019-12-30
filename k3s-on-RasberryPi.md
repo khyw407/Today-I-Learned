@@ -125,7 +125,39 @@ $ export MASTER_IP="Master 노드의 IP정보 입력"
 $ k3s agent --server https://${MASTER_IP}:6443 --token ${NODE_TOKEN}
 ```
 
-### 3-2) Kubernetes 기본 오브젝트
+### 3-2) 자주사용하는 kubectl 명령어
+
+기본명령어
+- apply : Apply a configuration change to a resource from a file or stdin.
+- get : List one or more resources.
+- describe : Display the detailed state of one or more resources.
+- delete : Delete resources by filenames, stdin, resources and names, or by resources and label selector
+- logs : Print the logs for a container in a pod
+- exec : Execute a command in a container
+
+```
+# pod, replicaset, deployment, service 조회
+$ kubectl get all
+
+# 결과 포멧 변경
+$ kubectl get nodes -o wide
+$ kubectl get nodes -o yaml
+$ kubectl get nodes -o json
+
+# describe 사용법
+# kubectl describe type/name
+# kubectl describe type name
+$ kubectl describe node <node name>
+$ kubectl describe node/<node name>
+
+# 나머지 명령어 사용법
+$ kubectl exec -it <POD_NAME>
+$ kubectl logs -f <POD_NAME|TYPE/NAME>
+$ kubectl apply -f <FILENAME>
+$ kubectl delete -f <FILENAME>
+```
+
+### 3-3) Kubernetes 기본 오브젝트
 
 Pod
 
