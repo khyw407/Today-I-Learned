@@ -37,18 +37,60 @@ $ docker info
 
     - k8s에서 Cloud Provider, Storage Plugin을 제거하였고, default 저장소가 etcd가 아닌 sqlite3로 되어 있다.
 
+    - Multi Master는 불가하나 Multi Node는 지원한다.
+
 ### 2) k3s 설치
 
 ```
 $ sudo su
 
 $ curl -sfL https://get.k3s.io | sh -
+
+$ sudo chown pi:pi /etc/rancher/k3s/k3s.yaml
+
+$ cp /etc/rancher/k3s/k3s.yaml ~/.kube/config (kube config 설정)
 ```
 
 k3s 삭제시
 
 ```
 $ sh /usr/local/bin/k3s-agent-uninstall.sh
+```
+
+### 2-1) helm 설치
+
+helm은 Kubernetes의 package managing tool 역할을 한다.(npm과 비슷한 형태로 Kubernetes 패키지 배포를 가능하게한다)
+chart라는 Packaging Foramt을 사용하는데 이는 Kubernetes의 리소스를 describe하는 파일의 집합을 의미한다.
+helm은 크게 client와 server(tiller)로 구성되며 client는 엔드 유저를 위한 command line client이고 주로 local chart 개발, repository managing, server(tiller)에 요청 등 chart를 관리하는 역할을 하고, Tiller는 chart의 배포와 릴리즈를 관리한다.
+
+Helm 설치
+```
+#download helm
+$ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > install-helm.sh
+
+#Make instalation script executable
+$ chmod u+x install-helm.sh
+
+#Install helm
+$ ./install-helm.sh
+```
+
+Tiller 설치 및 설정
+```
+#Create tiller service account
+$ kubectl create serviceaccount tiller -n kube-system
+
+#Create cluster role binding for tiller
+$ kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+
+#Initialize tiller
+$ helm init --service-account tiller --kubeconfig=/var/lib/rancher/k3s/agent/kubeconfig.yaml --tiller-image jessestuart/tiller:latest-arm
+
+#확인
+$ kubectl get pod -n kube-system
+
+#chart update
+$ helm repo update
 ```
 
 ### 3) k3s 설치확인
