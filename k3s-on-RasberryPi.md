@@ -275,7 +275,8 @@ spec:
   - {외부접속에서 접속하는IP}
 ```
 
-yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성하는 방법도 있음.
+externalIPs를 설정하는 경우 명시된 IP로 접근하는 경우에만 서비스 요청을 처리 가능
+yaml 파일을 생성하고 kubectl create -f {파일명.yaml} 형태로 생성하는 방법도 있음
 
 ### 5) Kubernetes Dashboard 설치
 
