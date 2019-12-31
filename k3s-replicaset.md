@@ -11,11 +11,39 @@
 ## 2. 실습
 1) YAML 파일
 ```
-
+apiVersion: apps/v1beta2
+kind: ReplicaSet
+metadata:
+  name: hello-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+      type: world
+  template:
+    metadata:
+      labels:
+        app: hello
+        type: world
+    spec:
+      containers:
+      - name: hello-container
+        image: {레파지토리/이미지명}
+        ports:
+        - containerPort: 8000
 ```
 
 2) 확인
 ```
+$ kubectl get pod --show-labels
+
+$ kubectl label pod/hello-rs-<{hash값}> type-
+
+$ kubectl label pod/hello-rs-<{hash값}> type=world
+
+$ kubectl scale --replicas=4 -f {YAML파일}
+
 $ kubectl get pod -o wide
 ```
 
