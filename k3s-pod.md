@@ -37,6 +37,11 @@ $ kubectl delete -f <filename>
 ```
 
 3) 확인
+
+![get](https://user-images.githubusercontent.com/37721713/71654533-9310d980-2d75-11ea-8d6b-962738f32784.png)
+
+![describe](https://user-images.githubusercontent.com/37721713/71654535-93a97000-2d75-11ea-833a-2a82d35e7ffe.png)
+
 ```
 $ kubectl get pods
 $ kubectl get pods -o wide
@@ -52,6 +57,9 @@ $ kubectl logs {Pod Name}
 ```
 
 5) Pod 접속
+
+![exec](https://user-images.githubusercontent.com/37721713/71654534-93a97000-2d75-11ea-841e-32030befc61c.png)
+
 ```
 $ kubectl exec -it {Pod Name} sh
 ```
