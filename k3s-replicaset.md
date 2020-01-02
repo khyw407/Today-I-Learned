@@ -7,6 +7,7 @@
     - Pod를 생성하고 개수를 유지
     - 복제할 개수, label selector, template 등을 설정으로 가지고 있음
 - 기능이 더 많은 Deployment를 더 자주 사용하나 Replicaset이 기반임
+    - Deployment는 ReplicaSet을 생성하고 ReplicaSet은 Pod을 생성하고 Pod은 k8s 스케줄러가 관리
 
 ## 2. 실습
 1) YAML 파일
