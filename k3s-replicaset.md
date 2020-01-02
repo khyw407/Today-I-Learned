@@ -12,7 +12,7 @@
 ## 2. 실습
 1) YAML 파일
 ```
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: hello-rs
