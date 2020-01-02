@@ -36,13 +36,38 @@ spec:
 ```
 
 2) 확인
+
+![check1](https://user-images.githubusercontent.com/37721713/71655274-62cb3a00-2d79-11ea-8143-c0a7e1dde2bc.PNG)
+
 ```
 $ kubectl get pod --show-labels
+```
 
+3) label 제거 테스트
+
+![check2](https://user-images.githubusercontent.com/37721713/71655275-62cb3a00-2d79-11ea-8024-0189b1fbdd81.PNG)
+
+```
+#type라는 label을 제거
 $ kubectl label pod/hello-rs-<{hash값}> type-
+```
 
+- label 제거시 새로운 pod가 생성됩니다. 
+
+![check3](https://user-images.githubusercontent.com/37721713/71655277-6363d080-2d79-11ea-8c63-dc3c1e489648.PNG)
+
+```
+#type라는 label을 다시 추가
 $ kubectl label pod/hello-rs-<{hash값}> type=world
+```
 
+- label 원복시 한개의 pod를 제거하고 yaml 파일에 선언한 replicas의 수를 유지합니다.
+
+4) scale 변경
+
+![scale](https://user-images.githubusercontent.com/37721713/71655278-6363d080-2d79-11ea-9a11-f0cca8d1f09d.PNG)
+
+```
 $ kubectl scale --replicas=4 -f {YAML파일}
 
 $ kubectl get pod -o wide
