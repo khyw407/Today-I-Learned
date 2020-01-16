@@ -17,6 +17,7 @@
   - helm으로 배포된 애플리케이션은 하나의 릴리즈로 불림(해당 릴리즈는 배포된 애플리케이션의 버전 관리를 가능하도록 함)
 
 2) 구성
+![1](https://user-images.githubusercontent.com/37721713/72503425-0985ff00-387f-11ea-860d-2b94c0405891.PNG)
 
 - Helm Chart : 쿠버네티스에서 리소스를 만들기 위한 템플릿화 된 yaml 형식의 파일
 
@@ -45,7 +46,11 @@ helm 3.x 버전부터 설치가 더욱 간결해졌고 tiller 서버 등 별도�
 2) Chartmuseum 설치
 * 가장 많이 사용하는 Private Chart Repository
 
-사진 2~4
+![2](https://user-images.githubusercontent.com/37721713/72503426-0a1e9580-387f-11ea-8e7b-d43aa7ce7c7f.PNG)
+
+![3](https://user-images.githubusercontent.com/37721713/72503428-0a1e9580-387f-11ea-916c-c4957bda7cbe.PNG)
+
+![4](https://user-images.githubusercontent.com/37721713/72503429-0ab72c00-387f-11ea-8f9f-5416309ece58.PNG)
 
 ```
 # helm repository 추가
@@ -216,4 +221,4 @@ $ helm history first-chart
 6-4) 접속
 - 엔드포인트 정보를 확인하고 접속
 
-사진5
+![5](https://user-images.githubusercontent.com/37721713/72503430-0ab72c00-387f-11ea-82b4-71b53b8a81cc.PNG)
