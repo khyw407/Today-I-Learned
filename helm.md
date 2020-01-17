@@ -221,4 +221,10 @@ $ helm history first-chart
 6-4) 접속
 - 엔드포인트 정보를 확인하고 접속
 
+6-5) chartmuseum의 chart를 삭제하고 싶은 경우
+```
+# chartmuseum에 있는 chart를 삭제하는 명령어
+$ curl -XDELETE http://{helmchartrepourl}/api/charts/{chart-name}/{version}
+```
+
 ![5](https://user-images.githubusercontent.com/37721713/72503430-0ab72c00-387f-11ea-82b4-71b53b8a81cc.PNG)
