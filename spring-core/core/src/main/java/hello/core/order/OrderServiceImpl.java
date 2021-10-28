@@ -16,11 +16,35 @@ public class OrderServiceImpl implements OrderService {
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     private final DiscountPolicy discountPolicy;
 
+    /*
+    @Autowired(required = false)
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("OrderServiceImpl setMemberRepository");
+        this.memberRepository = memberRepository;
+    }
+
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        System.out.println("OrderServiceImpl setDiscountPolicy");
+        this.discountPolicy = discountPolicy;
+    }
+    */
+
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("OrderServiceImpl constructor");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    /*
+    @Autowired
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("OrderServiceImpl method injection");
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+     */
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
