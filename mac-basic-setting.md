@@ -41,7 +41,9 @@ macOS는 기본적으로 gcc, make와 같은 컴파일 도구가 설치되어 �
 - homebrew를 설치하면 자동으로 Xcode 명령어 도구를 설치합니다. 따로 설치하지 않아도 됩니다.
 
 ```
+# homebrew를 먼저 설치했다면 에러메시지 발생
 $ xcode-select --install
+xcode-select: error: command line tools are already installed, use "Software Update" to install updates
 
 # gcc test
 $ gcc
@@ -51,7 +53,7 @@ clang: error: no input files
 ## git
 
 ```
-$ brew install git
+# git config 세팅
 $ git config --global user.name "Your Name"
 $ git config --global user.email "you@your-domain.com"
 ```
@@ -61,6 +63,57 @@ $ git config --global user.email "you@your-domain.com"
 macOS에 기본으로 설치되어 있는 Terminal 앱 대신 iTerm2를 터미널 앱으로 사용합니다. iTerm2는 기본 앱에 없는 다양한 기능이 있고 손쉽게 테마를 설정할 수 있습니다.
 
 ```
-$ brew cask install iterm2
+$ brew install --cask iterm2
+....
+....
+iterm2 was successfully installed!
+```
 
+## iTerm2 테마, 설정 변경
+
+![image](https://user-images.githubusercontent.com/37721713/145148162-c66727ef-9b1b-4336-a4ef-041aeeffa0f4.png)
+
+![image](https://user-images.githubusercontent.com/37721713/145148233-45e5a8c9-a821-4e7b-bbbe-62a41c5f9c88.png)
+
+![image](https://user-images.githubusercontent.com/37721713/145148597-9674c7d4-9fd1-45ca-9334-07e5f0234156.png)
+![image](https://user-images.githubusercontent.com/37721713/145148645-9cce3f61-e04b-4a3e-b94c-26b27033bd7f.png)
+![image](https://user-images.githubusercontent.com/37721713/145148966-cb69ecfb-f34e-4614-a605-927c6081855f.png)
+
+## oh-my-zsh
+
+```
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+## oh-my-zsh 테마변경
+
+```
+$ vi ~/.zshrc
+```
+
+## oh-my-zsh 플러그인 추가 설치
+
+```
+# zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# zsh-autosuggestions
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# plugin 추가
+$ vi ~/.zshrc
+
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
+
+$ source ~/.zshrc
+```
+
+## jq
+
+```
+$ brew install jq
 ```
