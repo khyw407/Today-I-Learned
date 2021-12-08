@@ -57,3 +57,10 @@ $ git config --global user.email "you@your-domain.com"
 ```
 
 ## iTerm2
+
+macOS에 기본으로 설치되어 있는 Terminal 앱 대신 iTerm2를 터미널 앱으로 사용합니다. iTerm2는 기본 앱에 없는 다양한 기능이 있고 손쉽게 테마를 설정할 수 있습니다.
+
+```
+$ brew cask install iterm2
+
+```
