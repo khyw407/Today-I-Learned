@@ -117,3 +117,25 @@ $ source ~/.zshrc
 ```
 $ brew install jq
 ```
+
+## vscode
+
+https://code.visualstudio.com/ 접속하여 다운로드
+
+![image](https://user-images.githubusercontent.com/37721713/145151432-62086ec8-de08-4af0-a3bf-f276c81e7b19.png)
+
+실행하고 한국언어팩을 설치한 뒤 재시작 진행
+
+## vscode 기본 설치 plugin
+
+![image](https://user-images.githubusercontent.com/37721713/145152158-6129a962-f0df-4fa3-8588-f5c64db19cae.png)
+
+## nvm
+
+```
+```
+
+## sdkman
+
+```
+```
