@@ -21,6 +21,9 @@
 
 ![image](https://user-images.githubusercontent.com/37721713/145139416-9313655b-4bd3-420b-8380-87986b2b4a2c.png)
 
+![image](https://user-images.githubusercontent.com/37721713/145526536-2b730472-5f26-4efd-b403-a056b0d360b5.png)
+
+
 ## Homebrew
 
 각종 커맨드라인 프로그램과 일반 프로그램(크롬..)을 손쉽게 설치해주는 맥용 패키지 매니저입니다.(최근에 리눅스도 지원하기 시작했습니다.) 리눅스의 apt나 yum과 비슷하며 brew외에 MacPorts 라는 패키지 메니저가 있는데 몇몇 단점으로 요즘은 거의 brew를 사용하는 추세입니다. 다양한 프로그램을 복잡한 빌드과정 없이 손쉽게 설치할 수 있고 업데이트, 관리도 간단하므로 안쓸 이유가 없는 필수 프로그램입니다.
