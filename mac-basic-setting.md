@@ -147,4 +147,26 @@ v16.13.1
 ## sdkman
 
 ```
+$ curl -s "https://get.sdkman.io" | bash
+$ source "$HOME/.sdkman/bin/sdkman-init.sh"
+$ sdk version
+SDKMAN 5.13.1
 ```
+
+## 노드 확장모듈
+
+```
+# nodemon
+$ npm install -g nodemon
+```
+
+## DBeaver
+
+https://dbeaver.io/download/
+
+## Compass
+
+https://www.mongodb.com/try/download/compass
+
+## Docker
+
