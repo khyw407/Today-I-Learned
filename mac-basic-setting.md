@@ -133,6 +133,15 @@ https://code.visualstudio.com/ 접속하여 다운로드
 ## nvm
 
 ```
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+$ export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+$ nvm
+....
+
+# stable node version install
+$ nvm install 16.13.1
+$ node -v
+v16.13.1
 ```
 
 ## sdkman
