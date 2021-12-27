@@ -163,6 +163,12 @@ SDKMAN 5.13.1
 ```
 # nodemon
 $ npm install -g nodemon
+
+# typescript
+$ npm install -g typescript
+
+# ts-node
+$ npm install -g ts-node
 ```
 
 ## DBeaver
@@ -174,3 +180,5 @@ https://dbeaver.io/download/
 https://www.mongodb.com/try/download/compass
 
 ## Docker
+
+https://www.docker.com/products/docker-desktop
